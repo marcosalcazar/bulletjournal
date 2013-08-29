@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bullet Journal - Web</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<link href="{{ STATIC_URL }}bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
+
+		<script src="{{ STATIC_URL }}jquery/jquery-2.0.3.min.js"></script>
+		<script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
+		
+		<script src="{{ STATIC_URL }}jquery/libs/jquery.cookie.js"></script>
+
+	</head>
+	<body>
+		<div class="container">
+			<div class="page-header">
+				<h1>{% block title %}{% endblock %} <small>{% block subtitle %}{% endblock %}</small></h1>
+			</div>
+			{% block content %}{% endblock %}
+		</div>
+	</body>
+</html>

@@ -1,0 +1,36 @@
+{% extends '_base.html' %}
+
+{% block title %}{{ today }}{% endblock %}
+
+{% block content %}
+<div class="row">
+	<div class="col-md-6">
+		<h2>Events</h2>
+		{% for day, items in events.items %}
+		{% ifequal day today %}
+		<div class="row"><div class="col-md-1"><hr /></div></div>
+		{% endifequal %}
+		<div class="row">
+			<div class="col-md-1">
+				{{ day|date:"d" }}
+			</div>
+			<div class="col-md-1">
+				{{ day|date:"D" }}
+			</div>
+			<div class="col-md-10">
+				{% for e in items %}
+					{% include 'journal/_event.html' with item=e %}
+				{% endfor %}
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+	<div class="col-md-6">
+		<h2>Tasks</h2>
+		{% for task in tasks %}
+		{% include 'journal/_task.html' with item=task %}
+		{% endfor %}
+	</div>
+</div>
+<script src="{{ STATIC_URL }}journal/js/items.js"></script>
+{% endblock %}

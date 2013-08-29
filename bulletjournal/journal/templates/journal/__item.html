@@ -1,0 +1,8 @@
+<div class="row item">
+	<div class="col-md-1">
+		<input type='checkbox' class="completed" value="{{ item.pk}}" {% if item.completed %}checked{% endif %}
+		 action="{% url 'journal:update_completed_item' item.pk %}"/>
+	</div>
+	<div class="col-md-1"><span class="badge">&nbsp;</span></div>
+	<div class="col-md-10">{{ item }}</div>
+</div>
