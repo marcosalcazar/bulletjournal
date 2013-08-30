@@ -9,6 +9,7 @@ class Collection(models.Model):
 class Item(models.Model):
 
     INDICATORS = (
+        ('N', ''),
         ('I', 'Important'),
         ('E', 'Keep an eye'),
         ('D', 'Inspiration')
@@ -19,7 +20,7 @@ class Item(models.Model):
     description = models.CharField(max_length=255)
     generated_from = models.ForeignKey('self', null=True, blank=True)
     irrelevant = models.BooleanField(default=False)
-    indicator = models.CharField(max_length=1, choices=INDICATORS, null=True, blank=True)
+    indicator = models.CharField(max_length=1, choices=INDICATORS)
     user = models.ForeignKey(AUTH_USER_MODEL)
     
     def __unicode__(self):

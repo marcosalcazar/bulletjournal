@@ -7,9 +7,6 @@
 	<div class="col-md-6">
 		<h2>Events</h2>
 		{% for day, items in events.items %}
-		{% ifequal day today %}
-		<div class="row"><div class="col-md-1"><hr /></div></div>
-		{% endifequal %}
 		<div class="row">
 			<div class="col-md-1">
 				{{ day|date:"d" }}

@@ -34,12 +34,20 @@ class Command(NoArgsCommand):
         Task.objects.create(
             date = today,
             description = 'Programm a lot!',
-            user = admin
+            user = admin,
+            indicator = 'N'
+        )
+        Event.objects.create(
+            date = today - datetime.timedelta(days=1),
+            description = 'Go shopping',
+            user = admin,
+            indicator = 'N'  
         )
         Event.objects.create(
             date = today,
             description = 'Meeting with Daniel',
-            user = admin     
+            user = admin,
+            indicator = 'N'  
         )
 
         print "Filling ended"

@@ -13,14 +13,22 @@ $.ajaxSetup({
 
 
 $(document).ready(function() {
-    $(".item input[type='checkbox'].completed").click(function(){
+    $(".item input[type='checkbox'].completed").change(function(){
     	var el = $(this);
     	var url = el.attr('action');
-    	console.log(el.prop('checked'))
     	$.post(url, {
     		'completed': el.prop('checked')
     	}, function(data){
     		console.log(data);
     	});
-    })
+    });
+    $(".item select.indicator").change(function(){
+    	var el = $(this);
+    	var url = el.attr('action');
+    	$.post(url, {
+    		'indicator': el.val()
+    	}, function(data){
+    		console.log(data);
+    	});
+    });
 });

@@ -1,8 +1,18 @@
-<div class="row item">
-	<div class="col-md-1">
-		<input type='checkbox' class="completed" value="{{ item.pk}}" {% if item.completed %}checked{% endif %}
-		 action="{% url 'journal:update_completed_item' item.pk %}"/>
+<div class="row item {% if item.date < today %}past{% endif %}">
+	<div class="col-md-3">
+		<div class="input-group">
+			<span class="input-group-addon">
+				<select class='indicator'
+				action="{% url 'journal:update_indicator_item' item.pk %}">
+				{% for i in item.INDICATORS %} <option value="{{ i.0 }}" {% ifequal item.indicator i.0 %}selected{% endifequal%}> {{ i.0 }} </option> {% endfor %}
+				</select> </span>
+			<span class="input-group-addon">
+				<input type='checkbox' class="completed" {% if item.completed %}checked{% endif %}
+				action="{% url 'journal:update_completed_item' item.pk %}"/>
+			</span>
+		</div><!-- /input-group -->
 	</div>
-	<div class="col-md-1"><span class="badge">&nbsp;</span></div>
-	<div class="col-md-10">{{ item }}</div>
+	<div class="col-md-9">
+		{{ item }}
+	</div>
 </div>

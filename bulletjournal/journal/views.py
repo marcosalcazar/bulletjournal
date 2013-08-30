@@ -3,7 +3,7 @@ from collections import OrderedDict
 from django.utils import simplejson
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import BaseUpdateView
-from journal.models import Event, Task, CompletableItem
+from journal.models import Event, Task, CompletableItem, Item
 import calendar
 import datetime
 
@@ -47,14 +47,30 @@ class MonthView(TemplateView):
 
 class UpdateCompletedItemView(JSONResponseMixin, BaseUpdateView):
     model = CompletableItem
-    
+
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        
+
         completed = simplejson.loads(request.POST.get('completed'))
         self.object.completed = completed
         self.object.save()
-        
+
+        return self.render_to_json_response({
+            'cod':1,
+            'msg':'Ok'
+        })
+
+
+class ChangeIndicatorForItemView(JSONResponseMixin, BaseUpdateView):
+    model = Item
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        indicator = request.POST.get('indicator')
+        self.object.indicator = indicator
+        self.object.save()
+
         return self.render_to_json_response({
             'cod':1,
             'msg':'Ok'
