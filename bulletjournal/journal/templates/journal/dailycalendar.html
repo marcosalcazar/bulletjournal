@@ -1,0 +1,18 @@
+{% extends '_base.html' %}
+{% load journal_filters %}
+
+{% block title %}Daily Calendar{% endblock %}
+
+{% block content %}
+<div class="row">
+	<div class="col-md-6">
+		{% for daygroup in days.items %}
+			{{ daygroup.0 }}
+			{% for item in daygroup.1 %}
+			{% render_item item %}
+			{% endfor %}
+		{% endfor %}
+	</div>
+	<div class="col-md-6"></div>
+</div>
+{% endblock %}

@@ -3,9 +3,11 @@ from collections import OrderedDict
 from django.utils import simplejson
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import BaseUpdateView
-from journal.models import Event, Task, CompletableItem, Item
+from journal.models import Event, Task, CompletableItem, Item, Note
 import calendar
 import datetime
+from django.db.models import Q
+from itertools import chain
 
 
 class MonthView(TemplateView):
@@ -42,6 +44,31 @@ class MonthView(TemplateView):
             c['events'][event.date].append(event)
         
         # returning the context
+        return c
+
+
+class DailyCalendar(TemplateView):
+    
+    template_name = 'journal/dailycalendar.html'
+    
+    def get_context_data(self, **kwargs):
+        c = TemplateView.get_context_data(self, **kwargs)
+        
+        today = datetime.date.today()
+        c['today'] = today # Added to the context so we can use it in the template
+        
+        days = OrderedDict()
+        c['days'] = days
+        
+        q = Q(date=today) & Q(user=self.request.user)
+        tasks = Task.objects.filter(q).filter(father__isnull=True).all()
+        events = Event.objects.filter(q).all()
+        notes = Note.objects.filter(q).all()
+        
+        days[today] = chain(tasks, events, notes) 
+        
+        print c['days']
+        
         return c
 
 
