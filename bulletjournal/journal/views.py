@@ -83,8 +83,8 @@ class UpdateCompletedItemView(JSONResponseMixin, BaseUpdateView):
         self.object.save()
 
         return self.render_to_json_response({
-            'cod':1,
-            'msg':'Ok'
+            'cod': 1,
+            'msg': 'Item updated'
         })
 
 
@@ -99,6 +99,6 @@ class ChangeIndicatorForItemView(JSONResponseMixin, BaseUpdateView):
         self.object.save()
 
         return self.render_to_json_response({
-            'cod':1,
-            'msg':'Ok'
+            'cod': 1,
+            'msg': 'Item Updated'
         })

@@ -1,0 +1,5 @@
+{% load journal_filters %}
+<h2>{{ day }}</h2>
+{% for item in items %}
+	{% render_item item %}
+{% endfor %}
