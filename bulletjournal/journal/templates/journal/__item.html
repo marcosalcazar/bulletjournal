@@ -7,8 +7,9 @@
 				{% for i in item.INDICATORS %} <option value="{{ i.0 }}" {% ifequal item.indicator i.0 %}selected{% endifequal%}> {{ i.0 }} </option> {% endfor %}
 				</select> </span>
 			<span class="input-group-addon">
-				<input type='checkbox' class="completed" {% if item.completed %}checked{% endif %}
+				<input type='checkbox' class="completed" {% if item.completed %}checked{% endif %} id='completed_{{ item.pk }}'
 				action="{% url 'journal:update_completed_item' item.pk %}"/>
+				<label for="completed_{{ item.pk }}"><span></span></label>
 			</span>
 		</div><!-- /input-group -->
 	</div>
